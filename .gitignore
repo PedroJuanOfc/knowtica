@@ -1,4 +1,44 @@
-# Internal documentation
-docs/
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
 
+# Virtual environments
+venv/
+.env/
+.env
+
+# =========================
+# macOS
+# =========================
 .DS_Store
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Docker
+# =========================
+*.sqlite3
+postgres_data/
+
+# =========================
+# Testing / coverage
+# =========================
+.coverage
+htmlcov/
+
+# =========================
+# Local documentation (internal notes)
+# =========================
+docs/
+internal-docs/

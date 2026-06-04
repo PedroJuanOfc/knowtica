@@ -1,7 +1,5 @@
 from sqlalchemy import Column, Integer, String, Float, DateTime, Text
-from sqlalchemy.orm import declarative_base
-
-Base = declarative_base()
+from storage.database import Base
 
 
 class Article(Base):

@@ -10,9 +10,15 @@ def scrape(url):
 
     soup = BeautifulSoup(html, "html.parser")
 
-    title = soup.find("h1", class_="article-hero__title").get_text(strip=True)
-    entry_div = soup.find("div", class_="entry-content")
-    paragraphs = entry_div.find_all("p", class_="wp-block-paragraph")
+    title_tag = soup.find("h1", class_="article-hero__title")
+    if title_tag is None:
+        return None
+    title = title_tag.get_text(strip=True)
+
+    entry_tag = soup.find("div", class_="entry-content")
+    if entry_tag is None:
+        return None
+    paragraphs = entry_tag.find_all("p", class_="wp-block-paragraph")
     content = " ".join([p.get_text(strip=True) for p in paragraphs])
 
     return {

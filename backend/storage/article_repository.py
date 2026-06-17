@@ -1,5 +1,6 @@
 from models.article import Article
 from storage.database import SessionLocal
+from sqlalchemy import select
 
 def save(data):
     article = Article(
@@ -9,6 +10,15 @@ def save(data):
         source=data["source"]
     )
     session = SessionLocal()
-    session.add(article)
-    session.commit()
-    session.close()
+    stmt = select(Article).where(Article.url == data["url"])
+    existing = session.scalars(stmt).first()
+
+    if existing is None:
+        session.add(article)
+        session.commit()
+        session.close()
+    else:
+        existing.content = data.get("content")
+        session.commit()
+        session.close()
+

@@ -17,3 +17,6 @@ class Article(Base):
     url: Mapped[str] = mapped_column(String(255), nullable=False)
     category: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
     tag: Mapped[Optional[str]] = mapped_column(String(255), nullable=True)
+    summary_short: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    summary_medium: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    summary_long: Mapped[Optional[str]] = mapped_column(Text, nullable=True)

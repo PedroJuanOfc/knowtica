@@ -7,7 +7,11 @@ def save(data):
         title=data["title"],
         url=data["url"],
         published_at=data["published_at"],
-        source=data["source"]
+        source=data["source"],
+        content=data["content"],
+        summary_short=data["summary_short"],
+        summary_medium=data["summary_medium"],
+        summary_long=data["summary_long"]
     )
     session = SessionLocal()
     stmt = select(Article).where(Article.url == data["url"])
@@ -19,6 +23,9 @@ def save(data):
         session.close()
     else:
         existing.content = data.get("content")
+        existing.summary_short = data.get("summary_short")
+        existing.summary_medium = data.get("summary_medium")
+        existing.summary_long = data.get("summary_long")
         session.commit()
         session.close()
 

@@ -4,6 +4,7 @@ from collectors.rss_collector import collect
 from collectors.article_scraper import scrape, scrape_venturebeat
 from storage.article_repository import save
 from agents.ai_generator import generate
+import time
 
 Base.metadata.create_all(engine)
 
@@ -25,3 +26,4 @@ for article in articles:
     article["summary_long"] = summary["long"]
 
     save(article)
+    time.sleep(2)

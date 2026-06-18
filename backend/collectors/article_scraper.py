@@ -5,7 +5,8 @@ from bs4 import BeautifulSoup
 def scrape(url):
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers, timeout=10)
-    response.raise_for_status()
+    if not response.ok:
+        return None
 
     html = response.text
 
@@ -28,7 +29,8 @@ def scrape(url):
 def scrape_venturebeat(url):
     headers = {"User-Agent": "Mozilla/5.0"}
     response = requests.get(url, headers=headers, timeout=10)
-    response.raise_for_status()
+    if not response.ok:
+        return None
 
     html = response.text
 

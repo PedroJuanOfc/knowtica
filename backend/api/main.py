@@ -17,7 +17,7 @@ def get_session():
 
 @app.get("/articles", response_model=list[ArticleResponse])
 def list_articles(
-    session: Session = Depends(get_session), skip: int = 0, limit: int = 10
+    session: Session = Depends(get_session), skip: int = 0, limit: int = 5
 ):
     articles = (
         session.query(Article)

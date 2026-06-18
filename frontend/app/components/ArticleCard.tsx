@@ -37,9 +37,11 @@ export default function ArticleCard({ article }: { article: Article }) {
       <p className="text-sm text-gray-400 mb-4">{article.source}</p>
 
       {activeFormat && (
-        <p className="text-gray-700 text-sm leading-relaxed mb-4 border-l-2 border-gray-200 pl-4">
-          {summaries[activeFormat]}
-        </p>
+        <div className="text-gray-700 text-sm leading-relaxed mb-4 border-l-2 border-gray-200 pl-4 flex flex-col gap-6">
+          {summaries[activeFormat]?.split("\n\n").map((paragraph, index) => (
+            <p key={index}>{paragraph}</p>
+          ))}
+        </div>
       )}
 
       <div className="flex gap-2">

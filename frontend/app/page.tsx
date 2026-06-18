@@ -10,8 +10,18 @@ interface Article {
   summary_long: string | null;
 }
 
-export default async function Home() {
-  const response = await fetch("http://127.0.0.1:8000/articles");
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { page: pageParam } = await searchParams;
+  const page = Number(pageParam) || 1;
+  const limit = 5;
+  const skip = (page - 1) * limit;
+  const response = await fetch(
+    `http://127.0.0.1:8000/articles?skip=${skip}&limit=${limit}`,
+  );
   const articles = await response.json();
   return (
     <main className="max-w-2xl mx-auto px-4 py-12">
@@ -31,6 +41,24 @@ export default async function Home() {
         {articles.map((article: Article) => (
           <ArticleCard key={article.id} article={article} />
         ))}
+        <div className="flex justify-between mt-6">
+          {page > 1 && (
+            <a
+              href={`/?page=${page - 1}`}
+              className="px-4 py-2 text-sm border border-gray-300 rounded-full text-gray-600 hover:border-gray-500"
+            >
+              ← Previous
+            </a>
+          )}
+          {articles.length === limit && (
+            <a
+              href={`/?page=${page + 1}`}
+              className="px-4 py-2 text-sm border border-gray-300 rounded-full text-gray-600 hover:border-gray-500 ml-auto"
+            >
+              Next →
+            </a>
+          )}
+        </div>
       </div>
     </main>
   );

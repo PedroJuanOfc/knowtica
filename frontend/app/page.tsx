@@ -5,6 +5,7 @@ interface Article {
   title: string;
   source: string;
   url: string;
+  published_at: string;
   summary_short: string | null;
   summary_medium: string | null;
   summary_long: string | null;

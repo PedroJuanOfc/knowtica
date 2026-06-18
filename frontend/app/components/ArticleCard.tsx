@@ -6,6 +6,7 @@ interface Article {
   title: string;
   source: string;
   url: string;
+  published_at: string;
   summary_short: string | null;
   summary_medium: string | null;
   summary_long: string | null;
@@ -34,7 +35,14 @@ export default function ArticleCard({ article }: { article: Article }) {
           {article.title}
         </a>
       </div>
-      <p className="text-sm text-gray-400 mb-4">{article.source}</p>
+      <p className="text-sm text-gray-400 mb-4">
+        {article.source} ·{" "}
+        {new Date(article.published_at + "Z").toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })}
+      </p>
 
       {activeFormat && (
         <div className="text-gray-700 text-sm leading-relaxed mb-4 border-l-2 border-gray-200 pl-4 flex flex-col gap-6">

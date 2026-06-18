@@ -6,6 +6,7 @@ from api.schemas import ArticleResponse
 
 app = FastAPI()
 
+
 def get_session():
     session = SessionLocal()
     try:
@@ -13,9 +14,18 @@ def get_session():
     finally:
         session.close()
 
+
 @app.get("/articles", response_model=list[ArticleResponse])
-def list_articles(session: Session = Depends(get_session)):
-    articles = session.query(Article).all()
+def list_articles(
+    session: Session = Depends(get_session), skip: int = 0, limit: int = 10
+):
+    articles = (
+        session.query(Article)
+        .order_by(Article.id.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
     return articles
 
 

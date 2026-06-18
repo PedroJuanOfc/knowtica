@@ -36,7 +36,7 @@ export default async function Home({
         </h1>
         <p className="text-gray-500">
           Skim the headlines. Expand any story into a short, medium or long
-          summary — without leaving the page.
+          summary, without leaving the page.
         </p>
       </div>
       <div className="flex flex-col gap-4">

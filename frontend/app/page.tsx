@@ -22,6 +22,7 @@ export default async function Home({
   const skip = (page - 1) * limit;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/articles?skip=${skip}&limit=${limit}`,
+    { cache: "no-store" },
   );
   const articles = await response.json();
   return (
